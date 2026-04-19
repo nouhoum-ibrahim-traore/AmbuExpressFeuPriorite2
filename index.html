@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Feu Tricolore Intelligent - 2 Axes</title>
+
+<link rel="stylesheet" href="styles.css">
+<script type="module" src="app.js"></script>
+
+</head>
+
+<body>
+
+<div class="card">
+
+  <h1>🚦 Feu Tricolore Intelligent</h1>
+  <div id="statusBadge" class="status-badge offline">Hors ligne</div>
+
+  <!-- Login UI -->
+  <div id="authBox">
+    <input id="emailField" type="email" placeholder="Email" />
+    <input id="passwordField" type="password" placeholder="Mot de passe" />
+    <button id="loginBtn" class="btn login-btn">Connexion</button>
+    <p id="authMsg"></p>
+  </div>
+
+  <!-- Control UI -->
+  <div id="controlBox" style="display:none;">
+    
+    <!-- Boutons Priorité -->
+    <div class="priority-section">
+      <h3>🚨 Mode Priorité Ambulance</h3>
+      <div class="priority-buttons">
+        <button id="priorityBtnNS" class="priority-button">
+          🚨 Priorité Nord-Sud
+        </button>
+        <button id="priorityBtnOE" class="priority-button">
+          🚨 Priorité Ouest-Est
+        </button>
+      </div>
+      <div id="priorityStatus" class="priority-status">Mode Normal</div>
+      <div id="countdown" class="countdown"></div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Les 2 Feux Tricolores -->
+    <h3>🚦 État des feux en temps réel</h3>
+    
+    <div class="traffic-lights-container">
+      <!-- Feu 1 : Nord-Sud -->
+      <div class="traffic-light-panel">
+        <h4>Feu Nord-Sud (GPIO 1-3)</h4>
+        <div class="traffic-light-visual">
+          <div class="light red" id="feu1Rouge"></div>
+          <div class="light orange" id="feu1Orange"></div>
+          <div class="light green" id="feu1Vert"></div>
+        </div>
+        <div class="light-status">
+          <div><span id="feu1RougeStatus">Éteint</span> 🔴</div>
+          <div><span id="feu1OrangeStatus">Éteint</span> 🟠</div>
+          <div><span id="feu1VertStatus">Éteint</span> 🟢</div>
+        </div>
+      </div>
+
+      <!-- Feu 2 : Ouest-Est -->
+      <div class="traffic-light-panel">
+        <h4>Feu Ouest-Est (GPIO 4-6)</h4>
+        <div class="traffic-light-visual">
+          <div class="light red" id="feu2Rouge"></div>
+          <div class="light orange" id="feu2Orange"></div>
+          <div class="light green" id="feu2Vert"></div>
+        </div>
+        <div class="light-status">
+          <div><span id="feu2RougeStatus">Éteint</span> 🔴</div>
+          <div><span id="feu2OrangeStatus">Éteint</span> 🟠</div>
+          <div><span id="feu2VertStatus">Éteint</span> 🟢</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Contrôle Manuel (pour test/debug) -->
+    <h4>🔧 Contrôle Manuel (Debug)</h4>
+    <div class="manual-controls">
+      <div class="manual-feu">
+        <h5>Feu Nord-Sud</h5>
+        <button id="feu1VertBtn" class="gpio-button green" data-feu="feu1" data-color="green">🟢 Vert</button>
+        <button id="feu1OrangeBtn" class="gpio-button orange" data-feu="feu1" data-color="orange">🟠 Orange</button>
+        <button id="feu1RougeBtn" class="gpio-button red" data-feu="feu1" data-color="red">🔴 Rouge</button>
+      </div>
+      <div class="manual-feu">
+        <h5>Feu Ouest-Est</h5>
+        <button id="feu2VertBtn" class="gpio-button green" data-feu="feu2" data-color="green">🟢 Vert</button>
+        <button id="feu2OrangeBtn" class="gpio-button orange" data-feu="feu2" data-color="orange">🟠 Orange</button>
+        <button id="feu2RougeBtn" class="gpio-button red" data-feu="feu2" data-color="red">🔴 Rouge</button>
+      </div>
+    </div>
+
+    <button id="logoutBtn" class="btn logout-btn">Déconnexion</button>
+  </div>
+
+</div>
+
+<!-- Boîte de dialogue fin de priorité -->
+<div id="endPriorityModal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <h2 id="modalTitle">⏰ Fin de la priorité</h2>
+    <p>Le temps de priorité (60 secondes) est écoulé.</p>
+    <p>Que souhaitez-vous faire ?</p>
+    
+    <div class="modal-buttons">
+      <button id="btnNormal" class="btn-modal btn-normal">
+        🚦 Passer au mode normal
+      </button>
+      <button id="btnProlonger" class="btn-modal btn-prolonger">
+        🚨 Prolonger la priorité (60s)
+      </button>
+    </div>
+    
+    <div id="autoCountdown" class="auto-countdown">
+      Retour automatique au mode normal dans <span id="autoSeconds">10</span>s...
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

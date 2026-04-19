@@ -1,0 +1,506 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Segoe UI", sans-serif;
+  color: white;
+}
+
+.card {
+  width: 480px; /* Légèrement plus large pour 2 feux */
+  max-width: 95%;
+  padding: 28px 25px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 10px 45px rgba(0,0,0,0.25);
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 10px;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+h3 {
+  margin: 20px 0 15px 0;
+  font-size: 18px;
+  color: #a0a0a0;
+}
+
+h4 {
+  margin: 15px 0 10px 0;
+  font-size: 16px;
+  color: #b0b0b0;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 6px 15px;
+  border-radius: 50px;
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+.online { background: #4caf50; }
+.offline { background: #e53935; }
+
+/* Section Priorité - 2 boutons */
+.priority-section {
+  background: rgba(0,0,0,0.2);
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.priority-section.active {
+  border-color: #ffd700;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+.priority-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 15px 0;
+  flex-wrap: wrap;
+}
+
+.priority-button {
+  flex: 1;
+  min-width: 140px;
+  padding: 16px 12px;
+  border-radius: 12px;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.priority-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+}
+
+.priority-button.active {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  animation: pulse 1.5s infinite;
+}
+
+.priority-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(245, 87, 108, 0.7); }
+  50% { transform: scale(1.02); box-shadow: 0 0 0 10px rgba(245, 87, 108, 0); }
+}
+
+.priority-status {
+  margin-top: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #b0b0b0;
+}
+
+.priority-status.active {
+  color: #ffd700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.countdown {
+  margin-top: 8px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  min-height: 30px;
+}
+
+/* Séparateur */
+.divider {
+  border: none;
+  height: 1px;
+  background: rgba(255,255,255,0.2);
+  margin: 25px 0;
+}
+
+/* Auth Box */
+#authBox {
+  width: 100%;
+  text-align: center;
+}
+
+input {
+  width: 90%;
+  padding: 14px;
+  margin: 10px 0;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  background: rgba(255,255,255,0.18);
+  color: white;
+  text-align: center;
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* Boutons standards */
+.btn {
+  width: 92%;
+  padding: 14px;
+  margin-top: 15px;
+  border-radius: 12px;
+  border: none;
+  font-size: 17px;
+  cursor: pointer;
+  color: white;
+  font-weight: 600;
+  background: linear-gradient(135deg, #03a9f4, #0277bd);
+  transition: 0.25s ease;
+  box-shadow: 0 6px 18px rgba(3, 169, 244, 0.35);
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.logout-btn {
+  background: linear-gradient(135deg, #e53935, #c62828);
+  box-shadow: 0 6px 18px rgba(229, 57, 53, 0.35);
+  margin-top: 25px;
+}
+
+/* NOUVEAU : Container des 2 feux tricolores */
+.traffic-lights-container {
+  display: flex;
+  justify-content: space-around;
+  gap: 15px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.traffic-light-panel {
+  background: rgba(0,0,0,0.3);
+  padding: 20px 15px;
+  border-radius: 20px;
+  text-align: center;
+  flex: 1;
+  min-width: 140px;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.traffic-light-panel h4 {
+  color: #ecf0f1;
+  margin-bottom: 15px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Visualisation des feux (cercles) */
+.traffic-light-visual {
+  background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+  padding: 20px 15px;
+  border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 15px;
+  border: 3px solid rgba(255,255,255,0.1);
+  box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.light {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #222;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
+  position: relative;
+}
+
+.light::after {
+  content: '';
+  position: absolute;
+  top: 10%;
+  left: 20%;
+  width: 30%;
+  height: 30%;
+  background: rgba(255,255,255,0.3);
+  border-radius: 50%;
+  filter: blur(2px);
+}
+
+.light.red.on {
+  background: radial-gradient(circle at 30% 30%, #ff6b6b, #c62828);
+  box-shadow: 0 0 30px rgba(198, 40, 40, 0.8), inset 0 2px 5px rgba(255,255,255,0.3);
+  animation: glow-red 1.5s ease-in-out infinite alternate;
+}
+
+.light.orange.on {
+  background: radial-gradient(circle at 30% 30%, #ffa726, #ef6c00);
+  box-shadow: 0 0 30px rgba(239, 108, 0, 0.8), inset 0 2px 5px rgba(255,255,255,0.3);
+  animation: glow-orange 1.5s ease-in-out infinite alternate;
+}
+
+.light.green.on {
+  background: radial-gradient(circle at 30% 30%, #66bb6a, #2e7d32);
+  box-shadow: 0 0 30px rgba(46, 125, 50, 0.8), inset 0 2px 5px rgba(255,255,255,0.3);
+  animation: glow-green 1.5s ease-in-out infinite alternate;
+}
+
+.light-status {
+  color: #888;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.light-status span {
+  transition: all 0.3s;
+}
+
+.light-status span.on {
+  color: #fff;
+  font-weight: bold;
+  text-shadow: 0 0 10px currentColor;
+}
+
+/* Contrôles manuels (Debug) */
+.manual-controls {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  margin: 15px 0;
+  flex-wrap: wrap;
+}
+
+.manual-feu {
+  text-align: center;
+  background: rgba(0,0,0,0.2);
+  padding: 15px;
+  border-radius: 12px;
+  flex: 1;
+  min-width: 120px;
+}
+
+.manual-feu h5 {
+  margin-bottom: 10px;
+  color: #aaa;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.manual-feu .gpio-button {
+  display: block;
+  width: 100%;
+  margin: 6px 0;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.3s;
+  opacity: 0.7;
+}
+
+.manual-feu .gpio-button:hover:not(:disabled) {
+  opacity: 1;
+  transform: translateX(3px);
+}
+
+.manual-feu .gpio-button.green { 
+  background: linear-gradient(135deg, #2e7d32, #1b5e20);
+  color: white;
+}
+.manual-feu .gpio-button.orange { 
+  background: linear-gradient(135deg, #ef6c00, #e65100);
+  color: white;
+}
+.manual-feu .gpio-button.red { 
+  background: linear-gradient(135deg, #c62828, #b71c1c);
+  color: white;
+}
+
+.manual-feu .gpio-button.on {
+  opacity: 1;
+  box-shadow: 0 0 15px currentColor;
+}
+
+/* Anciens boutons GPIO (pour compatibilité si besoin) */
+.traffic-light {
+  display: none; /* Caché car remplacé par les 2 feux */
+}
+
+.gpio-button {
+  pointer-events: none;
+  cursor: default;
+}
+
+/* Exception pour les boutons de connexion/déconnexion et priorité */
+.btn, .priority-button, .manual-feu .gpio-button {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+#authMsg {
+  margin-top: 10px;
+  color: #ffb3b3;
+  font-size: 14px;
+}
+
+/* Animations */
+@keyframes glow-green {
+  from { box-shadow: 0 0 20px rgba(46, 125, 50, 0.6); }
+  to { box-shadow: 0 0 40px rgba(46, 125, 50, 1), 0 0 60px rgba(46, 125, 50, 0.6); }
+}
+
+@keyframes glow-orange {
+  from { box-shadow: 0 0 20px rgba(239, 108, 0, 0.6); }
+  to { box-shadow: 0 0 40px rgba(239, 108, 0, 1), 0 0 60px rgba(239, 108, 0, 0.6); }
+}
+
+@keyframes glow-red {
+  from { box-shadow: 0 0 20px rgba(198, 40, 40, 0.6); }
+  to { box-shadow: 0 0 40px rgba(198, 40, 40, 1), 0 0 60px rgba(198, 40, 40, 0.6); }
+}
+
+/* Modal de fin de priorité */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: linear-gradient(135deg, rgba(26, 26, 46, 0.95), rgba(22, 33, 62, 0.95));
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: modalAppear 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+@keyframes modalAppear {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  color: #ffd700;
+  font-size: 24px;
+}
+
+.modal-content p {
+  color: #ccc;
+  margin: 15px 0;
+  font-size: 16px;
+}
+
+.modal-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.btn-modal {
+  padding: 15px 20px;
+  border-radius: 12px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-normal {
+  background: linear-gradient(135deg, #4caf50, #388e3c);
+  color: white;
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+}
+
+.btn-normal:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(76, 175, 80, 0.6);
+}
+
+.btn-prolonger {
+  background: linear-gradient(135deg, #ff9800, #f57c00);
+  color: white;
+  box-shadow: 0 4px 15px rgba(255, 152, 0, 0.4);
+}
+
+.btn-prolonger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 152, 0, 0.6);
+}
+
+.auto-countdown {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #888;
+  font-style: italic;
+}
+
+.auto-countdown.warning {
+  color: #ff5722;
+  font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .card {
+    width: 95%;
+    padding: 20px 15px;
+  }
+  
+  .traffic-lights-container {
+    flex-direction: column;
+  }
+  
+  .priority-buttons {
+    flex-direction: column;
+  }
+  
+  .priority-button {
+    width: 100%;
+  }
+}
